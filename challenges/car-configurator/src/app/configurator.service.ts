@@ -19,6 +19,8 @@ export class ConfiguratorService {
   readonly selectedCar = signal<CarModel | undefined>(undefined);
   readonly selectedColor = signal<Color | undefined>(undefined);
   readonly selectedConfig = signal<Config | undefined>(undefined);
+  readonly tow = signal<boolean>(false);
+  readonly yoke = signal<boolean>(false);
   
   readonly colors = computed(() => this.selectedCar()?.colors ?? []);
   readonly options = signal<CarOptions | undefined>(undefined);

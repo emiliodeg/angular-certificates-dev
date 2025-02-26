@@ -14,6 +14,8 @@ export class Step2Component {
   #service = inject(ConfiguratorService);
 
   options = this.#service.options
+  tow = this.#service.tow
+  yoke = this.#service.yoke
   selectConfig = this.#service.selectConfig
   selectedConfig = this.#service.selectedConfig
 }

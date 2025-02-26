@@ -22,10 +22,10 @@ Config:
 <div>
   @if (options()?.towHitch) {
     Tow hitch?
-    <input type="checkbox" />
+    <input type="checkbox" [(ngModel)]="tow" />
     <br />
   }
   @if (options()?.yoke) {
-    Yoke steering wheel? <input type="checkbox" />
+    Yoke steering wheel? <input type="checkbox" [(ngModel)]="yoke" />
   }
 </div>
