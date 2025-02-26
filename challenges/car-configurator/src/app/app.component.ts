@@ -1,12 +1,15 @@
-import { Component } from '@angular/core';
-import { Step1Component } from './step1/step1.component';
+import { Component, inject } from '@angular/core';
+import { RouterLink, RouterOutlet } from '@angular/router';
+import { ConfiguratorService } from './configurator.service';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [Step1Component],
+  imports: [RouterOutlet, RouterLink],
   templateUrl: 'app.component.html',
 })
 export class AppComponent {
-  name = 'Angular';
+  configuratorService = inject(ConfiguratorService);
+
+  isStep1Valid = this.configuratorService.selectedImage
 }

@@ -1,7 +1,7 @@
-import { computed, inject, Injectable, signal, Signal } from '@angular/core';
+import { computed, effect, inject, Injectable, signal, Signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { CarModel, Color } from './models.type';
+import { CarModel, CarOptions, Color, Config } from './models.type';
 
 @Injectable({
   providedIn: 'root',
@@ -14,10 +14,14 @@ export class ConfiguratorService {
     { initialValue: [] },
   );
 
+  readonly fetchOptions = (id: string) => this.http.get<CarOptions>(`/models/${id}`);
+
   readonly selectedCar = signal<CarModel | undefined>(undefined);
   readonly selectedColor = signal<Color | undefined>(undefined);
-
+  readonly selectedConfig = signal<Config | undefined>(undefined);
+  
   readonly colors = computed(() => this.selectedCar()?.colors ?? []);
+  readonly options = signal<CarOptions | undefined>(undefined);
 
   readonly selectedImage = computed(() => {
     const car = this.selectedCar();
@@ -28,13 +32,24 @@ export class ConfiguratorService {
     return `https://interstate21.com/tesla-app/images/${car.code}/${color.code}.jpg`;
   });
 
+  constructor() {
+    effect(() => {
+      if (this.selectedCar()?.code)
+        this.http.get<CarOptions>("options/" + this.selectedCar()?.code)
+          .subscribe(options => this.options.set(options))
+    });
+  }
+
   selectCar(car: CarModel) {
     this.selectedCar.set(car);
     this.selectedColor.set(undefined);
   }
   
   selectColor(color: Color) {
-    console.log({color});
     this.selectedColor.set(color);
+  }
+  
+  selectConfig(config: Config) {
+    this.selectedConfig.set(config);
   }
 }
