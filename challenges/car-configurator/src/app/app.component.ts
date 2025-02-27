@@ -12,4 +12,6 @@ export class AppComponent {
   configuratorService = inject(ConfiguratorService);
 
   isStep1Valid = this.configuratorService.selectedImage
+  availableSteps = this.configuratorService.availableStep
+  selectedImage = this.configuratorService.selectedImage
 }
