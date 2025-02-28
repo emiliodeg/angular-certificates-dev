@@ -74,6 +74,8 @@ export class ConfiguratorService {
   selectCar(car: CarModel) {
     this.selectedCar.set(car);
     this.selectedColor.set(undefined);
+    this.yoke.set(false);
+    this.tow.set(false);
   }
 
   selectColor(color: Color) {
