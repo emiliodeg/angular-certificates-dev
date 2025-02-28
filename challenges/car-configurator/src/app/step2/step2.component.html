@@ -2,7 +2,7 @@
 Config:
 <select
   [ngModel]="selectedConfig()"
-  (ngModelChange)="selectConfig(config.value)"
+  (ngModelChange)="handleSelectConfig(config.value)"
   #config="ngModel"
 >
   <option [ngValue]="undefined">Choose...</option>

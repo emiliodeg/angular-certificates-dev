@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ConfiguratorService } from '../configurator.service';
+import { CarModel, Color } from '../models.type';
 
 @Component({
   selector: 'app-step1',
@@ -14,10 +15,15 @@ export class Step1Component {
 
   allModels = this.#configuratorSrv.allModels;
   colors = this.#configuratorSrv.colors;
-  selectedCar = this.#configuratorSrv.selectedCar
-  selectedColor = this.#configuratorSrv.selectedColor
-  selectedImage = this.#configuratorSrv.selectedImage
+  selectedCar = this.#configuratorSrv.selectedCar;
+  selectedColor = this.#configuratorSrv.selectedColor;
+  selectedImage = this.#configuratorSrv.selectedImage;
 
-  handleSelectCar = this.#configuratorSrv.selectCar
-  handleSelectColor = this.#configuratorSrv.selectColor
+  handleSelectCar(car: CarModel) {
+    this.#configuratorSrv.selectCar(car);
+  }
+
+  handleSelectColor(color: Color) {
+    this.#configuratorSrv.selectColor(color);
+  }
 }
